@@ -1,7 +1,8 @@
-package mezzari.torres.lucas.kotlin_conductor
+package mezzari.torres.lucas.kotlin_conductor.flow
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import mezzari.torres.lucas.kotlin_conductor.R
 
 class MainActivity : AppCompatActivity() {
 
