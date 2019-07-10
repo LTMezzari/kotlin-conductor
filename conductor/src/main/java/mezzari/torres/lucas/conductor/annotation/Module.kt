@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
  * @see mezzari.torres.lucas.conductor.source.generic.modulated.ModulatedConductor
  * @see mezzari.torres.lucas.conductor.source.generic.modulated.ConductorModule
  **/
-@Target(AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Module (
     val step: KClass<*>
