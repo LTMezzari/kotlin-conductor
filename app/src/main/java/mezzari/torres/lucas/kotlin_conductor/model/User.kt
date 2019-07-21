@@ -6,5 +6,6 @@ package mezzari.torres.lucas.kotlin_conductor.model
  **/
 class User (
     val username: String = "",
-    val password: String = ""
+    val password: String = "",
+    val shouldRememberPassword: Boolean = false
 )
