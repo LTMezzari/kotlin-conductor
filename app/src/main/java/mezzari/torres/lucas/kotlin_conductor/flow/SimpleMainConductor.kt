@@ -33,7 +33,7 @@ object SimpleMainConductor: BaseConductor() {
 
     override fun start() {
         super.start()
-        this.user = SessionManager.user
+        this.user = SessionManager.user ?: User()
     }
 
     override fun end() {
@@ -65,6 +65,8 @@ object SimpleMainConductor: BaseConductor() {
                 this.user = current.user
                 if (this.user.shouldRememberPassword) {
                     SessionManager.user = this.user
+                } else {
+                    SessionManager.user = null
                 }
             }
         }
@@ -146,6 +148,6 @@ object SimpleMainConductor: BaseConductor() {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val day = calendar.get(Calendar.DAY_OF_WEEK)
-        return hour in 9..22 && day in 1..6
+        return hour in 9..17 && day in 2..6
     }
 }

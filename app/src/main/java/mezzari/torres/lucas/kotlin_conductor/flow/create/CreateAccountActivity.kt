@@ -11,11 +11,12 @@ import kotlinx.android.synthetic.main.activity_login.etUsername
 import mezzari.torres.lucas.conductor.source.Conductor
 import mezzari.torres.lucas.conductor.source.generic.implementation.BaseActivity
 import mezzari.torres.lucas.kotlin_conductor.R
+import mezzari.torres.lucas.kotlin_conductor.flow.AnnotatedMainConductor
 import mezzari.torres.lucas.kotlin_conductor.flow.SimpleMainConductor
 import mezzari.torres.lucas.kotlin_conductor.model.User
 
 class CreateAccountActivity : BaseActivity() {
-    override val conductor: Conductor = SimpleMainConductor
+    override val conductor: Conductor = AnnotatedMainConductor
 
     lateinit var user: User
 

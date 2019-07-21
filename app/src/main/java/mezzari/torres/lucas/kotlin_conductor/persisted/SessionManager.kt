@@ -15,20 +15,28 @@ object SessionManager {
         this.sharedPreferences = context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
     }
 
-    var user: User get() {
+    var user: User? get() {
         return sharedPreferences?.run {
             return@run User(
                 username = getString("username", "")!!,
                 password = getString("password", "")!!,
                 shouldRememberPassword = getBoolean("shouldRememberPassword", false)
             )
-        } ?: User()
+        }
     } set(value) {
-        sharedPreferences?.run {
+        value?.run {
+            sharedPreferences?.run {
+                edit()
+                    .putString("username", value.username)
+                    .putString("password", value.password)
+                    .putBoolean("shouldRememberPassword", value.shouldRememberPassword)
+                    .apply()
+            }
+        } ?: sharedPreferences?.run {
             edit()
-                .putString("username", value.username)
-                .putString("password", value.password)
-                .putBoolean("shouldRememberPassword", value.shouldRememberPassword)
+                .remove("username")
+                .remove("password")
+                .remove("shouldRememberPassword")
                 .apply()
         }
     }
