@@ -7,12 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import mezzari.torres.lucas.conductor.annotation.ConductorAnnotation
 import mezzari.torres.lucas.conductor.source.generic.annotated.AnnotatedConductor
 import mezzari.torres.lucas.conductor.source.generic.annotated.AnnotatedFlowCycle
+import mezzari.torres.lucas.conductor.source.generic.modulated.ConductorModule
+import mezzari.torres.lucas.conductor.source.generic.modulated.ModulatedConductor
 import mezzari.torres.lucas.conductor.source.path.DefaultPath
 import mezzari.torres.lucas.conductor.source.path.Path
 import mezzari.torres.lucas.kotlin_conductor.flow.block.BlockApplicationActivity
 import mezzari.torres.lucas.kotlin_conductor.flow.create.CreateAccountActivity
 import mezzari.torres.lucas.kotlin_conductor.flow.home.MainActivity
 import mezzari.torres.lucas.kotlin_conductor.flow.login.LoginActivity
+import mezzari.torres.lucas.kotlin_conductor.flow.login.LoginModule
 import mezzari.torres.lucas.kotlin_conductor.flow.splash.SplashActivity
 import mezzari.torres.lucas.kotlin_conductor.model.User
 import mezzari.torres.lucas.kotlin_conductor.persisted.SessionManager
@@ -25,11 +28,14 @@ import kotlin.reflect.KClass
  * @author Lucas T. Mezzari
  * @since 21/07/2019
  **/
-object AnnotatedMainConductor: AnnotatedConductor() {
+object ModulatedMainConductor: ModulatedConductor() {
+    override val modules: ArrayList<ConductorModule> = arrayListOf(
+        LoginModule
+    )
 
-    private const val CREATE_ACCOUNT = 12
+    const val CREATE_ACCOUNT = 12
 
-    private lateinit var user: User
+    lateinit var user: User
 
     private val activities: ArrayList<WeakReference<AppCompatActivity>> = arrayListOf()
 
@@ -68,41 +74,6 @@ object AnnotatedMainConductor: AnnotatedConductor() {
         }
     }
 
-    // ------------------------- LoginActivity
-
-    @ConductorAnnotation(LoginActivity::class, AnnotatedFlowCycle.STEP_INITIATED)
-    private fun onLoginActivityInitiated(loginActivity: LoginActivity) {
-        start()
-        loginActivity.user = this.user
-    }
-
-    @ConductorAnnotation(LoginActivity::class, AnnotatedFlowCycle.STEP_PAUSED)
-    private fun onLoginActivityPaused(loginActivity: LoginActivity) {
-        this.user = loginActivity.user
-        if (this.user.shouldRememberPassword) {
-            SessionManager.user = this.user
-        } else {
-            SessionManager.user = null
-        }
-    }
-
-    @ConductorAnnotation(LoginActivity::class, AnnotatedFlowCycle.STEP_RESULT)
-    private fun onLoginActivityResult(loginActivity: LoginActivity, requestCode: Int, resultCode: Int) {
-        if (requestCode == CREATE_ACCOUNT && resultCode == RESULT_OK) {
-            loginActivity.user = this.user
-        }
-    }
-
-    @ConductorAnnotation(LoginActivity::class, AnnotatedFlowCycle.NEXT)
-    private fun onLoginActivityNext(loginActivity: LoginActivity, path: Path) {
-        if (path == DefaultPath.MAIN) {
-            goForward(loginActivity, MainActivity::class)
-            end()
-        } else {
-            startActivityForResult(loginActivity, CreateAccountActivity::class, CREATE_ACCOUNT)
-        }
-    }
-
     // ------------------------- CreateAccountActivity
 
     @ConductorAnnotation(CreateAccountActivity::class, AnnotatedFlowCycle.NEXT)
@@ -133,20 +104,20 @@ object AnnotatedMainConductor: AnnotatedConductor() {
 
     // ------------------------- Helper Methods
 
-    private fun goForward(current: AppCompatActivity, activity: KClass<*>) {
+    fun goForward(current: AppCompatActivity, activity: KClass<*>) {
         this.activities += WeakReference(current)
         startActivity(current, activity)
     }
 
-    private fun startActivity(current: AppCompatActivity, activity: KClass<*>) {
+    fun startActivity(current: AppCompatActivity, activity: KClass<*>) {
         current.startActivity(Intent(current, activity.java))
     }
 
-    private fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
+    fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
     }
 
-    private fun isApplicationAvailable(): Boolean {
+    fun isApplicationAvailable(): Boolean {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val day = calendar.get(Calendar.DAY_OF_WEEK)
