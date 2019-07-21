@@ -55,8 +55,8 @@ object ModulatedMainConductor: ModulatedConductor() {
     // ------------------------- SplashActivity
 
     @ConductorAnnotation(SplashActivity::class, AnnotatedFlowCycle.NEXT)
-    private fun onSplashActivityNext(splashActivity: SplashActivity) {
-        if (!isApplicationAvailable()) {
+    private fun onSplashActivityNext(splashActivity: SplashActivity, path: Path) {
+        if (path == AccessPath.BLOCK) {
             startActivity(splashActivity, BlockApplicationActivity::class)
         } else {
             startActivity(splashActivity, LoginActivity::class)
@@ -68,10 +68,8 @@ object ModulatedMainConductor: ModulatedConductor() {
 
     @ConductorAnnotation(BlockApplicationActivity::class, AnnotatedFlowCycle.NEXT)
     private fun onBlockApplicationActivityNext(blockApplicationActivity: BlockApplicationActivity) {
-        if (isApplicationAvailable()) {
-            startActivity(blockApplicationActivity, LoginActivity::class)
-            blockApplicationActivity.finish()
-        }
+        startActivity(blockApplicationActivity, LoginActivity::class)
+        blockApplicationActivity.finish()
     }
 
     // ------------------------- CreateAccountActivity
@@ -115,12 +113,5 @@ object ModulatedMainConductor: ModulatedConductor() {
 
     fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
-    }
-
-    fun isApplicationAvailable(): Boolean {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val day = calendar.get(Calendar.DAY_OF_WEEK)
-        return hour in 9..17 && day in 2..6
     }
 }

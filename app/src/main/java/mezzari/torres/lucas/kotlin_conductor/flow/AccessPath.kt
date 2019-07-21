@@ -7,5 +7,6 @@ import mezzari.torres.lucas.conductor.source.path.Path
  * @since 21/07/2019
  **/
 enum class AccessPath: Path {
-    CREATE_ACCOUNT
+    CREATE_ACCOUNT,
+    BLOCK
 }

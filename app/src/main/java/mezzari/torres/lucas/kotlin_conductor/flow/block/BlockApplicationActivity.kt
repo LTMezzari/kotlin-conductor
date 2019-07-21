@@ -8,6 +8,7 @@ import mezzari.torres.lucas.kotlin_conductor.R
 import mezzari.torres.lucas.kotlin_conductor.flow.AnnotatedMainConductor
 import mezzari.torres.lucas.kotlin_conductor.flow.ModulatedMainConductor
 import mezzari.torres.lucas.kotlin_conductor.flow.SimpleMainConductor
+import mezzari.torres.lucas.kotlin_conductor.flow.archive.isApplicationAvailable
 
 class BlockApplicationActivity : BaseActivity() {
     override val conductor: Conductor = ModulatedMainConductor
@@ -16,7 +17,9 @@ class BlockApplicationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_block_application)
         btnTryAgain.setOnClickListener {
-            next()
+            if (isApplicationAvailable()) {
+                next()
+            }
         }
     }
 }
