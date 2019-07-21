@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Kotlin Conductor</string>
+    <string name="splash_message">Kotlin Conductor Example</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="message_remember_me">Remember Me</string>
+    <string name="action_login">Login</string>
+    <string name="action_create_account">Create Account</string>
+    <string name="message_block">This Application is only available between 9h and 18h. Try Again when the time is
+        right
+    </string>
+    <string name="action_try_again">Try Again</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="action_create">Create</string>
 </resources>
