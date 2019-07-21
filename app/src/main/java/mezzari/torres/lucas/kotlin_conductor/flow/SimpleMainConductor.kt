@@ -84,7 +84,7 @@ object SimpleMainConductor: BaseConductor() {
         super.nextStep(current, path)
         when (current) {
             is SplashActivity -> {
-                if (!isApplicationAvailable()) {
+                if (path == AccessPath.BLOCK) {
                     startActivity(current, BlockApplicationActivity::class)
                 } else {
                     startActivity(current, LoginActivity::class)
@@ -93,10 +93,8 @@ object SimpleMainConductor: BaseConductor() {
             }
 
             is BlockApplicationActivity -> {
-                if (isApplicationAvailable()) {
-                    startActivity(current, LoginActivity::class)
-                    current.finish()
-                }
+                startActivity(current, LoginActivity::class)
+                current.finish()
             }
 
             is LoginActivity -> {
@@ -142,12 +140,5 @@ object SimpleMainConductor: BaseConductor() {
 
     private fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
-    }
-
-    private fun isApplicationAvailable(): Boolean {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val day = calendar.get(Calendar.DAY_OF_WEEK)
-        return hour in 9..17 && day in 2..6
     }
 }

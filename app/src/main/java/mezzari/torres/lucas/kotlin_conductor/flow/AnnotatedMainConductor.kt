@@ -17,7 +17,6 @@ import mezzari.torres.lucas.kotlin_conductor.flow.splash.SplashActivity
 import mezzari.torres.lucas.kotlin_conductor.model.User
 import mezzari.torres.lucas.kotlin_conductor.persisted.SessionManager
 import java.lang.ref.WeakReference
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.reflect.KClass
 
@@ -49,8 +48,8 @@ object AnnotatedMainConductor: AnnotatedConductor() {
     // ------------------------- SplashActivity
 
     @ConductorAnnotation(SplashActivity::class, AnnotatedFlowCycle.NEXT)
-    private fun onSplashActivityNext(splashActivity: SplashActivity) {
-        if (!isApplicationAvailable()) {
+    private fun onSplashActivityNext(splashActivity: SplashActivity, path: Path) {
+        if (path == AccessPath.BLOCK) {
             startActivity(splashActivity, BlockApplicationActivity::class)
         } else {
             startActivity(splashActivity, LoginActivity::class)
@@ -62,10 +61,8 @@ object AnnotatedMainConductor: AnnotatedConductor() {
 
     @ConductorAnnotation(BlockApplicationActivity::class, AnnotatedFlowCycle.NEXT)
     private fun onBlockApplicationActivityNext(blockApplicationActivity: BlockApplicationActivity) {
-        if (isApplicationAvailable()) {
-            startActivity(blockApplicationActivity, LoginActivity::class)
-            blockApplicationActivity.finish()
-        }
+        startActivity(blockApplicationActivity, LoginActivity::class)
+        blockApplicationActivity.finish()
     }
 
     // ------------------------- LoginActivity
@@ -144,12 +141,5 @@ object AnnotatedMainConductor: AnnotatedConductor() {
 
     private fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
-    }
-
-    private fun isApplicationAvailable(): Boolean {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val day = calendar.get(Calendar.DAY_OF_WEEK)
-        return hour in 9..17 && day in 2..6
     }
 }
