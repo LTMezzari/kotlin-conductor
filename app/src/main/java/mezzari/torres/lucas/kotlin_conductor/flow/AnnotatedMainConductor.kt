@@ -24,9 +24,7 @@ import kotlin.reflect.KClass
  * @author Lucas T. Mezzari
  * @since 21/07/2019
  **/
-object AnnotatedMainConductor: AnnotatedConductor() {
-
-    private const val CREATE_ACCOUNT = 12
+class AnnotatedMainConductor: AnnotatedConductor() {
 
     private lateinit var user: User
 
@@ -69,7 +67,6 @@ object AnnotatedMainConductor: AnnotatedConductor() {
 
     @ConductorAnnotation(LoginActivity::class, AnnotatedFlowCycle.STEP_INITIATED)
     private fun onLoginActivityInitiated(loginActivity: LoginActivity) {
-        start()
         loginActivity.user = this.user
     }
 
@@ -141,5 +138,9 @@ object AnnotatedMainConductor: AnnotatedConductor() {
 
     private fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
+    }
+
+    companion object {
+        private const val CREATE_ACCOUNT = 12
     }
 }

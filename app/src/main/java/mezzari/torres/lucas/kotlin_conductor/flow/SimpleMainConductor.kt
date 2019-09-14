@@ -23,9 +23,7 @@ import kotlin.reflect.KClass
  * @author Lucas T. Mezzari
  * @since 21/07/2019
  **/
-object SimpleMainConductor: BaseConductor() {
-
-    private const val CREATE_ACCOUNT = 12
+class SimpleMainConductor: BaseConductor() {
 
     private lateinit var user: User
 
@@ -48,7 +46,6 @@ object SimpleMainConductor: BaseConductor() {
         super.onStepInitiated(current)
         when (current) {
             is LoginActivity -> {
-                start()
                 current.user = this.user
             }
 
@@ -140,5 +137,9 @@ object SimpleMainConductor: BaseConductor() {
 
     private fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
+    }
+
+    companion object {
+        private const val CREATE_ACCOUNT = 12
     }
 }

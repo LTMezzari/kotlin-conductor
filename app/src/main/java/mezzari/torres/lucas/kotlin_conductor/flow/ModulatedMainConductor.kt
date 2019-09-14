@@ -28,12 +28,10 @@ import kotlin.reflect.KClass
  * @author Lucas T. Mezzari
  * @since 21/07/2019
  **/
-object ModulatedMainConductor: ModulatedConductor() {
+class ModulatedMainConductor: ModulatedConductor() {
     override val modules: ArrayList<ConductorModule> = arrayListOf(
         LoginModule
     )
-
-    const val CREATE_ACCOUNT = 12
 
     lateinit var user: User
 
@@ -113,5 +111,9 @@ object ModulatedMainConductor: ModulatedConductor() {
 
     fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
+    }
+
+    companion object {
+        const val CREATE_ACCOUNT = 12
     }
 }
