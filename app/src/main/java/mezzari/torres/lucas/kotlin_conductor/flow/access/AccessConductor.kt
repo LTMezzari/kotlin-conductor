@@ -1,4 +1,4 @@
-package mezzari.torres.lucas.kotlin_conductor.flow
+package mezzari.torres.lucas.kotlin_conductor.flow.access
 
 import android.app.Activity
 import android.app.Activity.RESULT_OK
@@ -9,11 +9,11 @@ import mezzari.torres.lucas.conductor.source.generic.annotated.AnnotatedConducto
 import mezzari.torres.lucas.conductor.source.generic.annotated.AnnotatedFlowCycle
 import mezzari.torres.lucas.conductor.source.path.DefaultPath
 import mezzari.torres.lucas.conductor.source.path.Path
-import mezzari.torres.lucas.kotlin_conductor.flow.block.BlockApplicationActivity
-import mezzari.torres.lucas.kotlin_conductor.flow.create.CreateAccountActivity
-import mezzari.torres.lucas.kotlin_conductor.flow.home.MainActivity
-import mezzari.torres.lucas.kotlin_conductor.flow.login.LoginActivity
-import mezzari.torres.lucas.kotlin_conductor.flow.splash.SplashActivity
+import mezzari.torres.lucas.kotlin_conductor.flow.access.block.BlockApplicationActivity
+import mezzari.torres.lucas.kotlin_conductor.flow.access.create.CreateAccountActivity
+import mezzari.torres.lucas.kotlin_conductor.flow.access.home.MainActivity
+import mezzari.torres.lucas.kotlin_conductor.flow.access.login.LoginActivity
+import mezzari.torres.lucas.kotlin_conductor.flow.access.splash.SplashActivity
 import mezzari.torres.lucas.kotlin_conductor.model.User
 import mezzari.torres.lucas.kotlin_conductor.persisted.SessionManager
 import java.lang.ref.WeakReference
@@ -24,7 +24,7 @@ import kotlin.reflect.KClass
  * @author Lucas T. Mezzari
  * @since 21/07/2019
  **/
-class AnnotatedMainConductor: AnnotatedConductor() {
+class AccessConductor: AnnotatedConductor() {
 
     private lateinit var user: User
 
@@ -93,7 +93,9 @@ class AnnotatedMainConductor: AnnotatedConductor() {
             goForward(loginActivity, MainActivity::class)
             end()
         } else {
-            startActivityForResult(loginActivity, CreateAccountActivity::class, CREATE_ACCOUNT)
+            startActivityForResult(loginActivity, CreateAccountActivity::class,
+                CREATE_ACCOUNT
+            )
         }
     }
 
@@ -138,6 +140,11 @@ class AnnotatedMainConductor: AnnotatedConductor() {
 
     private fun startActivityForResult(current: AppCompatActivity, activity: KClass<*>, requestCode: Int) {
         current.startActivityForResult(Intent(current, activity.java), requestCode)
+    }
+
+    enum class AccessPath: Path {
+        CREATE_ACCOUNT,
+        BLOCK
     }
 
     companion object {

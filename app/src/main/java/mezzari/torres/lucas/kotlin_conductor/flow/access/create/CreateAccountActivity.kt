@@ -1,4 +1,4 @@
-package mezzari.torres.lucas.kotlin_conductor.flow.create
+package mezzari.torres.lucas.kotlin_conductor.flow.access.create
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,13 +12,12 @@ import mezzari.torres.lucas.conductor.source.Conductor
 import mezzari.torres.lucas.conductor.source.generic.implementation.BaseActivity
 import mezzari.torres.lucas.conductor.source.generic.provider.ConductorProvider
 import mezzari.torres.lucas.kotlin_conductor.R
-import mezzari.torres.lucas.kotlin_conductor.flow.AnnotatedMainConductor
-import mezzari.torres.lucas.kotlin_conductor.flow.ModulatedMainConductor
-import mezzari.torres.lucas.kotlin_conductor.flow.SimpleMainConductor
+import mezzari.torres.lucas.kotlin_conductor.archive.observe
+import mezzari.torres.lucas.kotlin_conductor.flow.access.AccessConductor
 import mezzari.torres.lucas.kotlin_conductor.model.User
 
 class CreateAccountActivity : BaseActivity() {
-    override val conductor: Conductor = ConductorProvider[ModulatedMainConductor::class]
+    override val conductor: Conductor = ConductorProvider[AccessConductor::class]
 
     lateinit var user: User
 
@@ -67,22 +66,6 @@ class CreateAccountActivity : BaseActivity() {
 
     override fun onBackPressed() {
         previous()
-    }
-
-    private fun EditText.observe(callback: (String?) -> Unit) {
-        addTextChangedListener(object: TextWatcher {
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                callback(p0?.toString())
-            }
-        })
     }
 
     private val EditText?.isNullOrEmpty: Boolean get() {

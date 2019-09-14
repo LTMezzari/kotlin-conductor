@@ -74,6 +74,13 @@ abstract class BaseConductor: Conductor {
     }
 
     @CallSuper
+    override fun nextStep(current: Any, pathId: Int) {
+        //Throw a Exception if the Step is not valid.
+        if (!isStepValid(current))
+            throw RuntimeException("The step isn't valid")
+    }
+
+    @CallSuper
     override fun previousStep(current: Any) {
         //Throw a Exception if the Step is not valid.
         if (!isStepValid(current))

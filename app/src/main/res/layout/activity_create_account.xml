@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".flow.create.CreateAccountActivity">
+        tools:context=".flow.access.create.CreateAccountActivity">
 
     <EditText
             android:id="@+id/etUsername"
