@@ -6,5 +6,24 @@
     <fragment
             android:id="@+id/listAddressesFragment"
             android:name="mezzari.torres.lucas.kotlin_conductor.flow.address.list.ListAddressesFragment"
-            android:label="ListAddressesFragment" />
+            android:label="ListAddressesFragment" >
+        <action
+                android:id="@+id/action_listAddressesFragment_to_searchAddressFragment"
+                app:destination="@id/searchAddressFragment" />
+        <action
+                android:id="@+id/action_listAddressesFragment_to_addressDetailFragment"
+                app:destination="@id/addressDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/searchAddressFragment"
+            android:name="mezzari.torres.lucas.kotlin_conductor.flow.address.search.SearchAddressFragment"
+            android:label="SearchAddressFragment" >
+        <action
+                android:id="@+id/action_searchAddressFragment_to_addressDetailFragment"
+                app:destination="@id/addressDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/addressDetailFragment"
+            android:name="mezzari.torres.lucas.kotlin_conductor.flow.address.detail.AddressDetailFragment"
+            android:label="AddressDetailFragment" />
 </navigation>

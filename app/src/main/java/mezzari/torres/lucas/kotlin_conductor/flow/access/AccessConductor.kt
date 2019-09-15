@@ -91,7 +91,6 @@ class AccessConductor: AnnotatedConductor() {
     private fun onLoginActivityNext(loginActivity: LoginActivity, path: Path) {
         if (path == DefaultPath.MAIN) {
             goForward(loginActivity, MainActivity::class)
-            end()
         } else {
             startActivityForResult(loginActivity, CreateAccountActivity::class,
                 CREATE_ACCOUNT
@@ -119,6 +118,7 @@ class AccessConductor: AnnotatedConductor() {
     @ConductorAnnotation(MainActivity::class, AnnotatedFlowCycle.STEP_INITIATED)
     private fun onMainActivityInitiated(mainActivity: MainActivity) {
         mainActivity.user = this.user
+        end()
     }
 
     @ConductorAnnotation(MainActivity::class, AnnotatedFlowCycle.PREVIOUS)

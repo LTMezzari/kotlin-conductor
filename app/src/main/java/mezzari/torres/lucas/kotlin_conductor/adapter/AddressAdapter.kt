@@ -14,14 +14,13 @@ import mezzari.torres.lucas.kotlin_conductor.model.Address
  * @author Lucas T. Mezzari
  * @since 14/09/2019
  */
-class AddressAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class AddressAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val inflater: LayoutInflater
-    val addresses: ArrayList<Address>
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+    private var addresses: ArrayList<Address>
     var onClickListener: ((Address) -> Unit)? = null
 
-    constructor(context: Context) {
-        this.inflater = LayoutInflater.from(context)
+    init {
         this.addresses = arrayListOf()
     }
 
@@ -61,7 +60,7 @@ class AddressAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             EMPTY_VIEW_TYPE -> {
-                (p0 as EmptyViewHolder).itemView.tvEmptyMessage.text = "There are no addresses"
+                (p0 as EmptyViewHolder).itemView.tvEmptyMessage.setText(R.string.message_empty_addresses)
             }
         }
     }
@@ -74,9 +73,16 @@ class AddressAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    fun setAddresses(addresses: ArrayList<Address>?) {
+        this.addresses.clear()
+        addresses?.run {
+            this@AddressAdapter.addresses = addresses
+        }
+    }
+
     fun put(address: Address?) {
         address?.run {
-            val position: Int = addresses.indexOfFirst { it.cep == cep }
+            val position: Int = addresses.indexOfFirst { it == this }
             if (position < 0) {
                 add(this)
             } else {

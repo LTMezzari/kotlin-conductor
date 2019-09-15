@@ -21,10 +21,18 @@ import mezzari.torres.lucas.kotlin_conductor.model.Address
 class ListAddressesFragment: BaseFragment() {
     override val conductor: AddressConductor = ConductorProvider[AddressConductor::class]
 
+    //Declares a variable to show  the saved addresses
+    var addressess: ArrayList<Address>? = null
+
     private val adapter: AddressAdapter by lazy {
         AddressAdapter(context!!).apply {
+            //Set the addresses
+            setAddresses(addressess)
+            //Set tbe onClickListener
             onClickListener = {
+                //Put the selected address into the conductor
                 conductor.address = it
+                //Go to the next step
                 next()
             }
         }
@@ -35,11 +43,13 @@ class ListAddressesFragment: BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //Inflate the layout
         return inflater.inflate(R.layout.fragment_list_addresses, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Apply the layout manager and adapter to the recycler view
         rvAddresses.apply {
             layoutManager = LinearLayoutManager(this@ListAddressesFragment.context, RecyclerView.VERTICAL, false)
             adapter = this@ListAddressesFragment.adapter
@@ -47,6 +57,7 @@ class ListAddressesFragment: BaseFragment() {
     }
 
     fun put(address: Address?) {
+        //Put the address in the adapter
         adapter.put(address)
     }
 }

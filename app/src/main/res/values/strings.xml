@@ -12,4 +12,17 @@
     <string name="action_try_again">Try Again</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="action_create">Create</string>
+    <string name="hint_search_address">Type here the CEP…</string>
+    <string name="action_search">Search</string>
+    <string name="hint_cep">CEP</string>
+    <string name="hint_street">Type here the street…</string>
+    <string name="hint_complement">Type here the complement…</string>
+    <string name="hint_neighborhood">Type here the neighborhood…</string>
+    <string name="hint_state">Type here the state…</string>
+    <string name="hint_state_abbreviation">Type here the state abbreviation…</string>
+    <string name="hint_unity">Type here the unity…</string>
+    <string name="action_save">Save</string>
+    <string name="action_address">Address</string>
+    <string name="action_contact">Contact</string>
+    <string name="message_empty_addresses">There are no addresses</string>
 </resources>
