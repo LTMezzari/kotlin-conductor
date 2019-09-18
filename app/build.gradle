@@ -35,6 +35,7 @@ dependencies {
 
     implementation project(':conductor')
     implementation 'com.github.LTMezzari:kotlin-network:0.5'
+    implementation 'com.github.LeandroSQ:partial-view:2.1'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'

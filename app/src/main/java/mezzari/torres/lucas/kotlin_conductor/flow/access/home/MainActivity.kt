@@ -10,6 +10,7 @@ import mezzari.torres.lucas.conductor.source.generic.provider.ConductorProvider
 import mezzari.torres.lucas.kotlin_conductor.R
 import mezzari.torres.lucas.kotlin_conductor.flow.access.AccessConductor
 import mezzari.torres.lucas.kotlin_conductor.flow.address.AddressConductor
+import mezzari.torres.lucas.kotlin_conductor.flow.contact.ContactConductor
 import mezzari.torres.lucas.kotlin_conductor.model.User
 
 class MainActivity : BaseActivity() {
@@ -26,7 +27,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        title = ""
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -44,16 +45,18 @@ class MainActivity : BaseActivity() {
                 return true
             }
 
-            android.R.id.home -> {
+            R.id.menuContact -> {
+                //Call the nextStep from the ContractConductor
+//                next(conductor = ConductorProvider[ContactConductor::class])
+                return true
+            }
+
+            R.id.menuLogout -> {
                 //Call the onBackPressed method
-                onBackPressed()
+                previous()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onBackPressed() {
-        previous()
     }
 }

@@ -25,4 +25,9 @@
     <string name="action_address">Address</string>
     <string name="action_contact">Contact</string>
     <string name="message_empty_addresses">There are no addresses</string>
+    <string name="action_logout">Logout</string>
+    <string name="hint_number">Number</string>
+    <string name="hint_age">Age</string>
+    <string name="hint_name">Name</string>
+    <string name="action_next">Next</string>
 </resources>

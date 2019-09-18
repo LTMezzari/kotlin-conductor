@@ -33,6 +33,7 @@
                 android:name=".flow.access.home.MainActivity"
                 android:screenOrientation="portrait"/>
         <activity android:name=".flow.address.activity.AddressActivity" />
+        <activity android:name=".flow.contact.activity.ContactActivity" />
     </application>
 
 </manifest>
