@@ -47,7 +47,7 @@ class MainActivity : BaseActivity() {
 
             R.id.menuContact -> {
                 //Call the nextStep from the ContractConductor
-//                next(conductor = ConductorProvider[ContactConductor::class])
+                next(conductor = ConductorProvider[ContactConductor::class])
                 return true
             }
 
