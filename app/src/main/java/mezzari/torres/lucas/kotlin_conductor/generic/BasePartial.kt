@@ -59,4 +59,8 @@ abstract class BasePartial: PartialView {
     open fun next(path: Path = DefaultPath.MAIN, conductor: Conductor? = this.conductor) {
         conductor?.nextStep(this, path)
     }
+
+    open fun next(path: Int, conductor: Conductor? = this.conductor) {
+        conductor?.nextStep(this, path)
+    }
 }

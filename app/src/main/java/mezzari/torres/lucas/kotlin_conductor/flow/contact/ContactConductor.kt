@@ -7,16 +7,22 @@ import mezzari.torres.lucas.conductor.source.generic.modulated.ConductorModule
 import mezzari.torres.lucas.conductor.source.generic.modulated.ModulatedConductor
 import mezzari.torres.lucas.kotlin_conductor.flow.access.home.MainActivity
 import mezzari.torres.lucas.kotlin_conductor.flow.contact.activity.ContactActivity
+import mezzari.torres.lucas.kotlin_conductor.flow.contact.activity.ContactActivityModule
 import mezzari.torres.lucas.kotlin_conductor.flow.contact.first.FirstStepPartial
+import mezzari.torres.lucas.kotlin_conductor.flow.contact.first.FirstStepPartialModule
+import mezzari.torres.lucas.kotlin_conductor.model.Contact
 
 /**
  * @author Lucas T. Mezzari
  * @since 17/09/2019
  */
 class ContactConductor: ModulatedConductor() {
-    override val modules: ArrayList<ConductorModule> = arrayListOf(
-
+    override val modules: ArrayList<ConductorModule<*>> = arrayListOf(
+        ContactActivityModule(),
+        FirstStepPartialModule()
     )
+
+    var contact: Contact? = null
 
     // ------------------------------------ MainActivity
 
@@ -36,10 +42,14 @@ class ContactConductor: ModulatedConductor() {
         contactActivity.title = "1"
     }
 
-    // ------------------------------------ ContactActivity
+    // ------------------------------------ FirstStepPartial
 
     @ConductorAnnotation(FirstStepPartial::class, AnnotatedFlowCycle.STEP_INITIATED)
     private fun onFirstStepPartialInitiated(firstStepPartial: FirstStepPartial) {
 
+    }
+
+    companion object {
+        const val ADDRESS_RESULT = 1
     }
 }

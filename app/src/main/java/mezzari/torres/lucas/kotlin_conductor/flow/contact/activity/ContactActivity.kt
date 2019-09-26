@@ -18,7 +18,7 @@ class ContactActivity: BaseActivity() {
     override val conductor: ContactConductor = ConductorProvider[ContactConductor::class]
 
     //Declare a helper variable to get the currentPartial
-    private val currentPartial: BasePartial? get() {
+    val currentPartial: BasePartial? get() {
         return viewFlipper.currentView as? BasePartial
     }
 
