@@ -8,7 +8,7 @@ import mezzari.torres.lucas.conductor.source.path.Path
  *
  * A abstract module to be used in the conductor
  **/
-abstract class ConductorModule {
+abstract class ConductorModule<T> {
 
     /**
      * Check { @link Conductor }
@@ -20,6 +20,17 @@ abstract class ConductorModule {
      * @see mezzari.torres.lucas.conductor.source.Conductor
      */
     open fun nextStep(current: Any, path: Path) {}
+
+    /**
+     * Check { @link Conductor }
+     * Next Step function for the Module
+     *
+     * @param current The current step
+     * @param path The path it should use
+     *
+     * @see mezzari.torres.lucas.conductor.source.Conductor
+     */
+    open fun nextStep(current: Any, path: Int) {}
 
     /**
      * Check { @link Conductor }

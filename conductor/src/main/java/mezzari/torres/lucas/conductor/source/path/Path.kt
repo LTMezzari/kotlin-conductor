@@ -8,4 +8,8 @@ package mezzari.torres.lucas.conductor.source.path
  *
  * @see mezzari.torres.lucas.conductor.source.Conductor
  **/
-interface Path
+interface Path {
+    companion object {
+        const val MAIN = -1
+    }
+}

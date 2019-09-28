@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_address"
+        app:startDestination="@id/listAddressesFragment">
+
+    <fragment
+            android:id="@+id/listAddressesFragment"
+            android:name="mezzari.torres.lucas.kotlin_conductor.flow.address.list.ListAddressesFragment"
+            android:label="ListAddressesFragment" >
+        <action
+                android:id="@+id/action_listAddressesFragment_to_searchAddressFragment"
+                app:destination="@id/searchAddressFragment" />
+        <action
+                android:id="@+id/action_listAddressesFragment_to_addressDetailFragment"
+                app:destination="@id/addressDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/searchAddressFragment"
+            android:name="mezzari.torres.lucas.kotlin_conductor.flow.address.search.SearchAddressFragment"
+            android:label="SearchAddressFragment" >
+        <action
+                android:id="@+id/action_searchAddressFragment_to_addressDetailFragment"
+                app:destination="@id/addressDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/addressDetailFragment"
+            android:name="mezzari.torres.lucas.kotlin_conductor.flow.address.detail.AddressDetailFragment"
+            android:label="AddressDetailFragment" />
+</navigation>
