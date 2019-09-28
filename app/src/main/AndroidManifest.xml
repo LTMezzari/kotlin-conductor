@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="mezzari.torres.lucas.kotlin_conductor">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:name=".MyApplication"
@@ -11,16 +12,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".flow.create.CreateAccountActivity"
+                android:name=".flow.access.create.CreateAccountActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".flow.block.BlockApplicationActivity"
+                android:name=".flow.access.block.BlockApplicationActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".flow.login.LoginActivity"
+                android:name=".flow.access.login.LoginActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".flow.splash.SplashActivity"
+                android:name=".flow.access.splash.SplashActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,8 +30,10 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".flow.home.MainActivity"
+                android:name=".flow.access.home.MainActivity"
                 android:screenOrientation="portrait"/>
+        <activity android:name=".flow.address.activity.AddressActivity" />
+        <activity android:name=".flow.contact.activity.ContactActivity" />
     </application>
 
 </manifest>

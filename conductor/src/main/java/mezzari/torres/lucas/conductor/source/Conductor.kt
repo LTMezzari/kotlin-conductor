@@ -22,5 +22,7 @@ interface Conductor {
 
     fun nextStep(current: Any, path: Path)
 
+    fun nextStep(current: Any, pathId: Int)
+
     fun previousStep(current: Any)
 }

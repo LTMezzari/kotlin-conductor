@@ -18,6 +18,9 @@ abstract class BaseConductor: Conductor {
 
     private var isStarted: Boolean = false
 
+    var onConductorStartedListener: (BaseConductor.() -> Unit)? = null
+    var onConductorEndedListener: (BaseConductor.() -> Unit)? = null
+
     /**
      * Method used to set up the conductor
      */
@@ -29,6 +32,8 @@ abstract class BaseConductor: Conductor {
 
         //Set isStarted to true
         isStarted = true
+        //Call the onConductorStarted
+        onConductorStartedListener?.invoke(this)
     }
 
     @CallSuper
@@ -39,6 +44,8 @@ abstract class BaseConductor: Conductor {
 
         //Set isStarted to false
         isStarted = false
+        //Call the onConductorEndedListener
+        onConductorEndedListener?.invoke(this)
     }
 
     @CallSuper
@@ -64,6 +71,13 @@ abstract class BaseConductor: Conductor {
 
     @CallSuper
     override fun nextStep(current: Any, path: Path) {
+        //Throw a Exception if the Step is not valid.
+        if (!isStepValid(current))
+            throw RuntimeException("The step isn't valid")
+    }
+
+    @CallSuper
+    override fun nextStep(current: Any, pathId: Int) {
         //Throw a Exception if the Step is not valid.
         if (!isStepValid(current))
             throw RuntimeException("The step isn't valid")
