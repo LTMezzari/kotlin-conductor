@@ -18,6 +18,7 @@ abstract class BaseConductor: Conductor {
 
     private var isStarted: Boolean = false
 
+    var onConductorStartedListener: (BaseConductor.() -> Unit)? = null
     var onConductorEndedListener: (BaseConductor.() -> Unit)? = null
 
     /**
@@ -31,6 +32,8 @@ abstract class BaseConductor: Conductor {
 
         //Set isStarted to true
         isStarted = true
+        //Call the onConductorStarted
+        onConductorStartedListener?.invoke(this)
     }
 
     @CallSuper
