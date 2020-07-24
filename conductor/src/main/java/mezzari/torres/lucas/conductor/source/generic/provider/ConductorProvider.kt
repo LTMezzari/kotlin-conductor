@@ -33,7 +33,7 @@ object ConductorProvider {
         if (conductor == null) {
             //Get a empty declared constructor from the class or throw an Exception
             val constructor =
-                conductorClass.java.constructors.first { it.parameters.isEmpty() }
+                conductorClass.java.constructors.first { it.parameterTypes.isEmpty() }
                     ?: throw IllegalArgumentException("The Conductor should contain a empty constructor")
             //Creates a new instance from the constructor
             val newConductor = constructor.newInstance() as T
